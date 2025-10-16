@@ -1,0 +1,7 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+.app-container { display: flex; min-height: 100vh; }
+.main-content { flex: 1; padding: 16px; background: #f7f8fb; }
+.dashboard-content { margin-top: 16px; }
+.card { background: #fff; padding: 12px; border-radius: 8px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+button { padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer; background: #007bff; color: white; }
+button:disabled { opacity: 0.6; cursor: default; }
