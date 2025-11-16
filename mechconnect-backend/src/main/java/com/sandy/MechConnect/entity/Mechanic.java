@@ -18,9 +18,7 @@ public class Mechanic {
     private double price;
     private double rating;
     private String location;
-
     private String status;
-
     // Default constructor
     public Mechanic() {}
 

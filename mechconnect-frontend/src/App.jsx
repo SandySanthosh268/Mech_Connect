@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Customer pages
@@ -25,13 +26,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default route */}
+        {/* Default route → redirect to login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* Auth */}
+        {/* 🔐 Auth routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-        {/* Customer routes */}
+        {/* 👥 Customer routes */}
         <Route
           path="/customer/dashboard"
           element={
@@ -73,7 +75,7 @@ function App() {
           }
         />
 
-        {/* Mechanic routes */}
+        {/* 🔧 Mechanic routes */}
         <Route
           path="/mechanic/dashboard"
           element={
@@ -107,7 +109,7 @@ function App() {
           }
         />
 
-        {/* Admin routes */}
+        {/* 🧑‍💼 Admin routes */}
         <Route
           path="/admin/dashboard"
           element={
