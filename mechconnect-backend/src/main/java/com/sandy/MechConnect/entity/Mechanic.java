@@ -10,20 +10,36 @@ public class Mechanic {
     private Long id;
 
     private String name;
-    private String email;   // <-- make sure this exists
-    private String password; // <-- make sure this exists
+    private String email;
+    private String password;
+
     private String skill;
     private int experience;
     private String serviceType;
     private double price;
     private double rating;
     private String location;
+
     private String status;
-    // Default constructor
+
+    // ⭐ NEW FIELD
+    private boolean profileCompleted = false;
+
     public Mechanic() {}
 
-    // Getters and Setters
+    // ---------------- GETTERS & SETTERS ----------------
 
+    public boolean isProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public void setProfileCompleted(boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
@@ -33,20 +49,16 @@ public class Mechanic {
         this.email = email;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -121,4 +133,3 @@ public class Mechanic {
         }
     }
 }
-

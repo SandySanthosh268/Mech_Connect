@@ -15,6 +15,31 @@ public class MechanicController {
     @Autowired
     private MechanicRepository mechanicRepo;
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateMechanicProfile(
+            @PathVariable Long id,
+            @RequestBody Mechanic updated
+    ) {
+        return mechanicRepo.findById(id)
+                .map(mechanic -> {
+
+                    mechanic.setName(updated.getName());
+                    mechanic.setSkill(updated.getSkill());
+                    mechanic.setExperience(updated.getExperience());
+                    mechanic.setServiceType(updated.getServiceType());
+                    mechanic.setPrice(updated.getPrice());
+                    mechanic.setLocation(updated.getLocation());
+
+                    // ⭐ IMPORTANT LINE
+                    mechanic.setProfileCompleted(true);
+
+                    mechanicRepo.save(mechanic);
+                    return ResponseEntity.ok(mechanic);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
     // Search mechanics for customers
     @GetMapping("/search")
     public ResponseEntity<List<Mechanic>> searchMechanics(

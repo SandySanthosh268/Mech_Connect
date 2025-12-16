@@ -52,30 +52,47 @@ public class AuthController {
         return ResponseEntity.ok(saved);
     }
 
-    // 🔹 Login with JWT
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
-        // Customer Login
+
+        // ---------------- CUSTOMER LOGIN ----------------
         Optional<Customer> customer = customerRepo.findByEmailAndPassword(email, password);
         if (customer.isPresent()) {
             String token = jwtUtil.generateToken(email, "CUSTOMER");
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
+
+            return ResponseEntity.ok(
+                    Collections.singletonMap("token", token)
+            );
         }
 
-        // Mechanic Login
+        // ---------------- MECHANIC LOGIN ----------------
         Optional<Mechanic> mechanic = mechanicRepo.findByEmailAndPassword(email, password);
         if (mechanic.isPresent()) {
+            Mechanic m = mechanic.get();
             String token = jwtUtil.generateToken(email, "MECHANIC");
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
+
+            return ResponseEntity.ok(
+                    new java.util.HashMap<String, Object>() {{
+                        put("token", token);
+                        put("role", "MECHANIC");
+                        put("id", m.getId());
+                        put("email", m.getEmail());
+                        put("profileCompleted", m.isProfileCompleted());
+                    }}
+            );
         }
 
-        // Admin Login
+        // ---------------- ADMIN LOGIN ----------------
         Optional<Admin> admin = adminRepo.findByEmailAndPassword(email, password);
         if (admin.isPresent()) {
             String token = jwtUtil.generateToken(email, "ADMIN");
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
+
+            return ResponseEntity.ok(
+                    Collections.singletonMap("token", token)
+            );
         }
 
         return ResponseEntity.status(401).body("❌ Invalid Credentials");
     }
+
 }
